@@ -3,7 +3,11 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.get_routes, name='get_routes'),
-    path('products/', views.get_products, name='get_products'),
-    path('products/<str:pk>/', views.get_product, name='get_product'),
+    path('users/login', views.MyTokenObtainPairView.as_view(),
+         name='token_obtain_pair'),
+    path('', views.get_routes, name='routes'),
+    path('users/', views.get_users, name='users'),
+    path('users/profile/', views.get_user_profile, name='user-profile'),
+    path('products/', views.get_products, name='products'),
+    path('products/<str:pk>/', views.get_product, name='product'),
 ]
