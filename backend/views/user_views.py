@@ -1,12 +1,12 @@
+from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .models import User, Product
-from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
-from django.contrib.auth.hashers import make_password
+from backend.models import User
+from backend.serializers import UserSerializer, UserSerializerWithToken
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -52,18 +52,4 @@ def get_user_profile(request):
 def get_users(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def get_products(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def get_product(request, pk):
-    product = Product.objects.get(pk=pk)
-    serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
