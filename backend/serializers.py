@@ -1,7 +1,7 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from .models import Product, Order, OrderItem, ShippingAddress, Review
 
 
