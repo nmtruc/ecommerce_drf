@@ -106,7 +106,7 @@ function RegisterScreen({ location, history }) {
                     Have an Account? <Link
                         to={redirect ? `/login?redirect=${redirect}` : '/login'}>
                         Sign In
-                        </Link>
+                    </Link>
                 </Col>
             </Row>
         </FormContainer >

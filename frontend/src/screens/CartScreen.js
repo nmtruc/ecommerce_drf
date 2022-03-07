@@ -9,6 +9,7 @@ function CartScreen({ match, location, history }) {
     const productId = match.params.id
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
     const dispatch = useDispatch()
+
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
@@ -18,11 +19,12 @@ function CartScreen({ match, location, history }) {
         }
     }, [dispatch, productId, qty])
 
+
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))
     }
 
-    const checkOutHandler = () => {
+    const checkoutHandler = () => {
         history.push('/login?redirect=shipping')
     }
 
@@ -45,9 +47,11 @@ function CartScreen({ match, location, history }) {
                                     <Col md={3}>
                                         <Link to={`/product/${item.product}`}>{item.name}</Link>
                                     </Col>
+
                                     <Col md={2}>
                                         ${item.price}
                                     </Col>
+
                                     <Col md={3}>
                                         <Form.Control
                                             as="select"
@@ -55,16 +59,23 @@ function CartScreen({ match, location, history }) {
                                             onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
                                         >
                                             {
+
                                                 [...Array(item.countInStock).keys()].map((x) => (
                                                     <option key={x + 1} value={x + 1}>
                                                         {x + 1}
                                                     </option>
                                                 ))
                                             }
+
                                         </Form.Control>
                                     </Col>
+
                                     <Col md={1}>
-                                        <Button type='button' variant='light' onClick={() => removeFromCartHandler(item.product)}>
+                                        <Button
+                                            type='button'
+                                            variant='light'
+                                            onClick={() => removeFromCartHandler(item.product)}
+                                        >
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </Col>
@@ -82,17 +93,20 @@ function CartScreen({ match, location, history }) {
                             <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
                             ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                            <Button
-                                type='button'
-                                className='btn-block'
-                                disabled={cartItems.length === 0}
-                                onClick={checkOutHandler}
-                            >
-                                Proceed To Checkout
-                            </Button>
-                        </ListGroup.Item>
                     </ListGroup>
+
+                    <ListGroup.Item>
+                        <Button
+                            type='button'
+                            className='btn-block'
+                            disabled={cartItems.length === 0}
+                            onClick={checkoutHandler}
+                        >
+                            Proceed To Checkout
+                        </Button>
+                    </ListGroup.Item>
+
+
                 </Card>
             </Col>
         </Row>
