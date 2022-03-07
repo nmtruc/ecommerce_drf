@@ -4,6 +4,8 @@ from backend.views.product_views import *
 
 urlpatterns = [
     path('', get_products, name='get_products'),
-    path('<str:pk>/', get_product, name='get_product'),
+    path('create/', create_product, name='create_product'),
+    path('update/<str:pk>/', update_product, name='update_product'),
     path('delete/<str:pk>/', delete_product, name='delete_product'),
+    path('<str:pk>/', get_product, name='get_product'),
 ]
