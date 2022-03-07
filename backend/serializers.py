@@ -55,9 +55,9 @@ class ProductSerializer(ModelSerializer):
 
 
 class OrderSerializer(ModelSerializer):
+    user = SerializerMethodField(read_only=True)
     orderItems = SerializerMethodField(read_only=True)
     shippingAddress = SerializerMethodField(read_only=True)
-    user = SerializerMethodField(read_only=True)
 
     class Meta:
         model = Order

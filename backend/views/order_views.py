@@ -25,7 +25,7 @@ def add_order_items(request):
 
         shipping = ShippingAddress.objects.create(
             order=order,
-            access=data['shippingAddress']['address'],
+            address=data['shippingAddress']['address'],
             city=['shippingAddress']['city'],
             postalCode=['shippingAddress']['postalCode'],
             country=['shippingAddress']['country'],
