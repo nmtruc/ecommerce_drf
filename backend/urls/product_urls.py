@@ -3,6 +3,7 @@ from backend.views.product_views import *
 
 
 urlpatterns = [
-    path('', get_products, name='products'),
-    path('<str:pk>/', get_product, name='product-detail'),
+    path('', get_products, name='get_products'),
+    path('<str:pk>/', get_product, name='get_product'),
+    path('delete/<str:pk>/', delete_product, name='delete_product'),
 ]
